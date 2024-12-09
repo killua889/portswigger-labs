@@ -15,11 +15,23 @@ To use this tool, you'll need:
 - `requests` library for making HTTP requests. You can install it using:
   ```bash
   pip install requests
-## Arguments
-- -u, --url: The target URL (e.g., https://www.example.com/).
-- -t, --trackingid: The TrackingId cookie value.
-- -s, --session: The session cookie value.
-- -p, --proxy: Enable proxy usage (default: Burp Suite on 127.0.0.1:8080).
+
+  ```
+## Usage
+
+Run the tool with the following command:
+  ```bash
+
+python main.py -u <url> -t <trackingid> -s <session> [-p]
+-u : The target URL of the vulnerable application.
+-t : The TrackingId cookie value.
+-s : The session cookie value.
+-p : Optional flag to use a proxy (default is Burp Suite on 127.0.0.1:8080).
+  ```
+Example:
+  ```bash
+python main.py -u "http://example.com" -t "adf12345" -s "abcd1234" -p
+  ```
 
 ## How It Works
 - The tool will brute-force the password of the administrator user by sending SQL injection payloads.
