@@ -1,14 +1,14 @@
 # SQL Injection Tool for Blind SQL injection with conditional errors
 
 This tool automates blind SQL injection to solve the Blind SQL injection with conditional errors lab in portswiger , specifically targeting cookies (e.g., TrackingId). It is designed for educational purposes to demonstrate SQL injection exploitation techniques.
-Features
+## Features
 
     Exploits SQL injection vulnerabilities via cookies.
     Allows for proxy integration (e.g., Burp Suite).
     Retrieves sensitive information such as passwords from a database.
     Works with a custom character set (a-z0-9) for faster enumeration.
 
-Prerequisites
+## Prerequisites
 
 Before using the script, ensure you have the following installed:
 
@@ -22,7 +22,7 @@ To install the libraries, use:
 
 pip install requests urllib3
 
-How to Install
+## How to Install
 
     Clone the repository:
 
