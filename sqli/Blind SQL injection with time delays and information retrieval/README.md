@@ -1,5 +1,6 @@
-# SQL Injection Tool for Blind SQL injection with conditional responses
-This tool automates blind SQL injection to solve the Blind SQL injection with conditional responses lab in portswiger , specifically targeting cookies (e.g., TrackingId). It is designed for educational purposes to demonstrate SQL injection exploitation techniques.
+# SQL Injection Tool for Blind SQL injection with time delays and information retrieval
+
+This tool automates blind SQL injection to solve the  Blind SQL injection with time delays and information retrieval lab in portswiger , specifically targeting cookies (e.g., TrackingId). It is designed for educational purposes to demonstrate SQL injection exploitation techniques.
 ## Features
 
     Exploits SQL injection vulnerabilities via cookies.
@@ -26,7 +27,8 @@ pip install requests urllib3
     Clone the repository:
 
     git clone https://github.com/killua889/portswigger-labs.git
-    cd portswigger-labs/sqli/Blind\ SQL\ injection\ with\ conditional\ responses
+    cd portswigger-labs/sqli/Blind\ SQL\ injection\ with\ time\ delays\ and\ information\ retrieval
+
 
     Verify the script file: Ensure main.py exists in the folder.
 
